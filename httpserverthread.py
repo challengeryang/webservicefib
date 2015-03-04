@@ -69,18 +69,19 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 
 def signal_handler():
     """ handle signnals """
-    # optional because the service is set to daemon
     signal.signal(signal.SIGHUP, signal.SIG_IGN)
     signal.signal(signal.SIGTERM, signal.SIG_IGN)
 
 if __name__ == '__main__':
 
     daemonize("/", PIDFILE)
+    # optional because the service is set to daemon
     signal_handler()
 
     http_server = ThreadedHTTPServer(('0.0.0.0', PORT), Handler)
     httpdlogger.info("serving at port %d" % PORT)
     try:
         http_server.serve_forever()
+    # for testing purpose
     except KeyboardInterrupt:
         httpdlogger.info("existing...")
