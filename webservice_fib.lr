@@ -1,0 +1,14 @@
+/var/webservice/httpd.log {
+    compress
+    dateext
+    maxage 365
+    rotate 99
+    size=+4096k
+    notifempty
+    missingok
+    create 644 root root
+    postrotate
+        chmod 644 /var/webservice/httpd.log
+    endscript
+}
+
